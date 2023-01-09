@@ -22,11 +22,28 @@ class _MaterialScopeState extends State<MaterialScope> {
       ],
       supportedLocales: S.delegate.supportedLocales,
       themeMode: ThemeScope.modeOf(context),
-      home: const Scaffold(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: Scaffold(
         body: Center(
-          child: Text(
-            "Mxgodev's starter app",
-            textScaleFactor: 2,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Mxgodev's starter app",
+                textScaleFactor: 2,
+              ),
+              IconButton(
+                onPressed: () {
+                  if (ThemeScope.brightnessOf(context) == Brightness.dark) {
+                    ThemeScope.setMode(context, ThemeMode.light);
+                  } else {
+                    ThemeScope.setMode(context, ThemeMode.dark);
+                  }
+                },
+                icon: const Icon(Icons.light_mode),
+              ),
+            ],
           ),
         ),
       ),

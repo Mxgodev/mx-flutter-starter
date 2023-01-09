@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mx_flutter_starter/src/common/data/dependencies.dart';
@@ -12,6 +14,17 @@ class ThemeScope extends StatefulWidget {
   }) : super(key: key);
 
   static ThemeMode modeOf(BuildContext context) => _InheritedThemeScope.of(context).themeMode;
+
+  static Brightness brightnessOf(BuildContext context) {
+    switch (modeOf(context)) {
+      case ThemeMode.system:
+        return window.platformBrightness;
+      case ThemeMode.light:
+        return Brightness.light;
+      case ThemeMode.dark:
+        return Brightness.dark;
+    }
+  }
 
   static void setMode(BuildContext context, ThemeMode mode) =>
       _InheritedThemeScope.of(context).state.setThemeMode(mode);
