@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mx_flutter_starter/src/common/localization/generated/l10n.dart';
 
 class MaterialScope extends StatefulWidget {
   const MaterialScope({Key? key}) : super(key: key);
@@ -10,8 +12,15 @@ class MaterialScope extends StatefulWidget {
 class _MaterialScopeState extends State<MaterialScope> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      localizationsDelegates: const [
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: const Scaffold(
         body: Center(
           child: Text(
             "Mxgodev's starter app",

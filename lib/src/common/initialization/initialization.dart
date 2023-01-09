@@ -9,6 +9,7 @@ Future<void> $initializeApp() => _$initializeApp ??= Future<void>(() async {
       late final WidgetsBinding binding;
       try {
         binding = WidgetsFlutterBinding.ensureInitialized()..deferFirstFrame();
+        await $setupLogging();
         _catchExceptions();
         await platformInitialization();
       } on Object catch (e, s) {
@@ -29,7 +30,6 @@ void _catchExceptions() {
 
   final sourceFlutterError = FlutterError.onError;
   FlutterError.onError = (details) {
-    logger.severe("Flutter error", details.exception, details.stack);
     sourceFlutterError?.call(details);
   };
 }
